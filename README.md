@@ -1,20 +1,23 @@
 # hyperfetch
 
-A fast, configurable system info tool written in Rust. It prints a neofetch-style summary with ASCII art, colorized labels, and a large set of hardware/OS details.
+A fast, configurable system info tool written in Rust. It prints a neofetch‑style summary with ASCII art, distro‑aware colors, and a wide range of hardware/OS details.
 
-## Features
-- Wide set of system info: OS, kernel, uptime, packages, shell, display, CPU/GPU, memory, disks, network, battery, and more
-- ASCII art logos with distro-aware color palettes
-- Multi-battery aggregation (combined percent and time)
-- Optional public IP lookup (feature-gated)
+## Highlights
+- Wide system info coverage: OS, kernel, uptime, packages, shell, display, CPU/GPU, memory, disks, network, battery, audio, locale, and more
+- ASCII logos loaded from the repo’s `src/ascii` folder (or a custom folder)
+- Neofetch‑style `$1..$9` and `$R` color tokens supported in ASCII assets
+- Distro‑aware palette (e.g. Gentoo purple, macOS yellow)
+- Multi‑battery aggregation (combined percent + time)
 - JSON output for scripting
-- Supports Linux and macOS (with macOS-specific fallbacks)
+- Public IP lookup (feature‑gated)
+- Linux + macOS support (macOS uses targeted fallbacks)
 
 ## Install
 Build from source:
 ```bash
 cargo build --release
 ```
+
 Run:
 ```bash
 ./target/release/hyperfetch
@@ -88,23 +91,27 @@ public_ip = false
 ```
 
 ## ASCII Art
-By default, ASCII art is loaded from the repo’s `src/ascii` folder. You can override the folder using:
+By default, ASCII art is loaded from the repo’s `src/ascii` folder. You can override it:
 ```bash
 export HYPERFETCH_ASCII_DIR=/path/to/ascii
 ```
 
-The ASCII assets support neofetch-style `$1..$9` and `$R` color tokens. The palette is chosen by distro.
+ASCII assets support neofetch‑style `$1..$9` and `$R` color tokens. The palette is selected by distro.
 
-## macOS Support is experimental currently
-macOS is supported with fallbacks for:
-- OS name/version
-- CPU model
-- Uptime and boot time
-
-Battery info on macOS is read via `pmset -g batt`.
+## macOS Notes
+macOS uses fallbacks for:
+- OS name/version (`sw_vers`)
+- CPU model (`sysctl`)
+- Uptime/boot time (`sysctl kern.boottime`)
+- Battery (`pmset -g batt`)
 
 ## Public IP
-Public IP lookup is gated behind the `network` feature. If you enable it, it queries an external service.
+Public IP lookup is behind the `network` feature and uses external services.
+
+Enable it at build time:
+```bash
+cargo build --release --features network
+```
 
 ## Development
 Run in debug:
@@ -113,4 +120,4 @@ cargo run --
 ```
 
 ## License
-AGPLv3
+No license file is currently included. Add one if you plan to distribute.

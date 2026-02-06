@@ -120,4 +120,4 @@ cargo run --
 ```
 
 ## License
-No license file is currently included. Add one if you plan to distribute.
+AGPL-3.0

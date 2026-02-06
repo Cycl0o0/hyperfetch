@@ -424,7 +424,7 @@ fn parse_macos_boot_time(s: &str) -> Option<i64> {
             if ch.is_ascii_digit() {
                 current.push(ch);
             } else if current.len() >= 9 {
-                digits = current;
+                digits = current.clone();
                 break;
             } else {
                 current.clear();

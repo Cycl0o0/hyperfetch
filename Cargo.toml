@@ -1,0 +1,39 @@
+[package]
+name = "hyperfetch"
+version = "1.0.0"
+edition = "2021"
+authors = ["cycl0o0"]
+description = "A comprehensive system information tool - neofetch alternative with extended features"
+license = "AGPL-3.0"
+repository = "https://github.com/cycl0o0/hyperfetch"
+keywords = ["system", "info", "neofetch", "fetch", "linux"]
+categories = ["command-line-utilities", "hardware-support"]
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+sysinfo = "0.30"
+colored = "2"
+hostname = "0.4"
+users = "0.11"
+nix = { version = "0.28", features = ["fs", "net", "hostname"] }
+regex = "1"
+reqwest = { version = "0.11", features = ["blocking"], optional = true }
+dirs = "5"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+libc = "0.2"
+
+[features]
+default = ["network"]
+network = ["reqwest"]
+
+[[bin]]
+name = "hyperfetch"
+path = "src/main.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

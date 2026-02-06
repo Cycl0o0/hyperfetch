@@ -136,6 +136,7 @@ pub fn print_info(info: &SystemInfo, ascii: &AsciiArt, config: &DisplayConfig) {
         }
     }
 
+    #[cfg(feature = "network")]
     if let Some(public_ip) = info.public_ip.as_ref() {
         let mut ip_str = public_ip.ip.clone();
         let mut location_parts = Vec::new();

@@ -77,6 +77,7 @@ pub struct InfoOptions {
     pub network: bool,
     #[serde(default = "default_true")]
     pub battery: bool,
+    #[cfg(feature = "network")]
     #[serde(default)]
     pub public_ip: bool,
 }
@@ -144,6 +145,7 @@ impl Default for InfoOptions {
             disk: true,
             network: true,
             battery: true,
+            #[cfg(feature = "network")]
             public_ip: false,
         }
     }

@@ -372,6 +372,7 @@ fn trim_lossy(bytes: &[u8]) -> String {
     String::from_utf8_lossy(bytes).trim().to_string()
 }
 
+#[cfg(target_os = "macos")]
 fn command_output_trim(cmd: &str, args: &[&str]) -> Option<String> {
     let output = Command::new(cmd).args(args).output().ok()?;
     if !output.status.success() {

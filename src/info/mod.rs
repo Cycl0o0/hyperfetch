@@ -61,6 +61,7 @@ pub struct SystemInfo {
 
     // Network
     pub interfaces: Vec<NetworkInterface>,
+    #[cfg(feature = "network")]
     pub public_ip: Option<PublicIpInfo>,
 
     // Power
@@ -114,6 +115,7 @@ pub struct NetworkInterface {
     pub state: Option<String>,
 }
 
+#[cfg(feature = "network")]
 #[derive(Debug, Clone, Serialize)]
 pub struct PublicIpInfo {
     pub ip: String,
@@ -183,6 +185,7 @@ impl Default for SystemInfo {
             display_server: None,
             resolution: None,
             interfaces: Vec::new(),
+            #[cfg(feature = "network")]
             public_ip: None,
             battery: None,
             brightness: None,

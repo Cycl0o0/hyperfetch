@@ -48,6 +48,7 @@ struct Args {
     json: bool,
 
     /// Fetch and display public IP with geolocation
+    #[cfg(feature = "network")]
     #[arg(long)]
     public_ip: bool,
 
@@ -123,7 +124,10 @@ fn main() {
     }
 
     // Determine if we should fetch public IP
+    #[cfg(feature = "network")]
     let fetch_public_ip = args.public_ip || config.info.public_ip;
+    #[cfg(not(feature = "network"))]
+    let fetch_public_ip = false;
 
     // Gather system information
     let info = SystemInfo::gather(fetch_public_ip);

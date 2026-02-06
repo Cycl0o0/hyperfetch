@@ -1,4 +1,6 @@
-use crate::info::{NetworkInterface, PublicIpInfo, SystemInfo};
+use crate::info::{NetworkInterface, SystemInfo};
+#[cfg(feature = "network")]
+use crate::info::PublicIpInfo;
 use std::fs;
 use std::process::Command;
 
